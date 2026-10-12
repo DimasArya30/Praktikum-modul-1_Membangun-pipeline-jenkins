@@ -2,7 +2,6 @@ pipeline {
   agent any
   environment {
     REGISTRY_CREDENTIALS = 'dockerhub-credentials'
-    // Path asli DockerDesktop di laptop ACER
     PATH = "C:\\Users\\ACER\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
   }
   stages {
@@ -23,8 +22,8 @@ pipeline {
     }
     stage('Push Docker Image') {
       steps {
-        withCredentials([usernamePassword(credentialsId: REGISTRY_CREDENTIALS, usernameVariable: 'USER', passwordVariable: 'PASS')]) {
-          bat 'docker login -u %USER% -p %PASS%'
+        withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+          bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS%'
           bat 'docker push dimasarya30/simple-app:latest'
         }
       }
