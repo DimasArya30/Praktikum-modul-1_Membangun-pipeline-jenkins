@@ -2,8 +2,8 @@ pipeline {
   agent any
   environment {
     REGISTRY_CREDENTIALS = 'dockerhub-credentials'
-    // Menambahkan lokasi standar Docker Windows ke PATH eksekusi Jenkins
-    PATH = "C:\\Program Files\\Docker\\Docker\\resources\\bin;C:\\Program Files\\Docker\\Docker;${env.PATH}"
+    // Path asli DockerDesktop di laptop ACER
+    PATH = "C:\\Users\\ACER\\AppData\\Local\\Programs\\DockerDesktop\\resources\\bin;${env.PATH}"
   }
   stages {
     stage('Checkout') { 
