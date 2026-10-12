@@ -20,8 +20,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 echo 'Membangun Docker image...'
-                bat "docker build -t %IMAGE_NAME%:%BUILD_NUMBER% ."
-                bat "docker tag %IMAGE_NAME%:%BUILD_NUMBER% %IMAGE_NAME%:latest"
+                bat 'docker build -t %IMAGE_NAME%:%BUILD_NUMBER% .'
+                bat 'docker tag %IMAGE_NAME%:%BUILD_NUMBER% %IMAGE_NAME%:latest'
             }
         }
         stage('Push Docker Image') {
@@ -29,8 +29,8 @@ pipeline {
                 echo 'Push image ke Docker Hub...'
                 withCredentials([usernamePassword(credentialsId: REGISTRY_CREDENTIALS, usernameVariable: 'USER', passwordVariable: 'PASS')]) {
                     bat 'docker login -u %USER% -p %PASS%'
-                    bat "docker push %IMAGE_NAME%:%BUILD_NUMBER%"
-                    bat "docker push %IMAGE_NAME%:latest"
+                    bat 'docker push %IMAGE_NAME%:%BUILD_NUMBER%'
+                    bat 'docker push %IMAGE_NAME%:latest'
                 }
             }
         }
